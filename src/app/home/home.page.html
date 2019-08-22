@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+    <ion-button (click)="onLogOut()">
+        <ion-icon slot="start" name="log-out"></ion-icon>
+        Cerrar sesión
+      </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let chat of chats | async">
+      <ion-avatar slot="start">
+        <img [src]="chat.img" />
+      </ion-avatar>
+      <ion-label>
+        <h2><b>{{chat.name}}</b></h2>
+        <p>{{chat.description}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
