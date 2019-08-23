@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: 'AIzaSyA5rZGJEOy0N_M34jkRTQP7q2u2b9xxhNE',
+    apiKey: '*******',
     authDomain: 'chatdecusis.firebaseapp.com',
     databaseURL: 'https://chatdecusis.firebaseio.com',
     projectId: 'chatdecusis',
