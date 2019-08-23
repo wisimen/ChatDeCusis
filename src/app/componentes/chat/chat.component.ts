@@ -11,13 +11,13 @@ import { Observable } from 'rxjs';
 })
 export class ChatComponent implements OnInit {
 
-  chat: Chat;
+  public chat: Chat;
+  public room: any;
   public messages: Observable<Message[]>;
-  room: any;
-  public message: Message;
+  public message: Message = ({}as Message);
   constructor(private navParams: NavParams, private modalController: ModalController, private chatsService: ChatsService) { }
   ngOnInit() {
-    this.chatsService.getChatRoom(this.navParams.get('chat').id).subscribe(c=>{
+    this.chatsService.getChatRoom(this.navParams.get('chat').id).subscribe(c => {
       this.chat = c;
     });
   }
@@ -25,5 +25,9 @@ export class ChatComponent implements OnInit {
     this.modalController.dismiss();
   }
   onSendMessage() {
+    this.message.type = 'text';
+    this.message.date = new Date();
+    this.chatsService.sendMessageTo(this.message, this.chat.id);
+    this.message = ({}as Message);
   }
 }

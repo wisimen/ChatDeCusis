@@ -4,7 +4,7 @@ import { ChatsService } from '../servicios/chats.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../servicios/auth.service';
 import { of, Observable } from 'rxjs';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -16,12 +16,12 @@ export class HomePage implements OnInit {
   constructor(
     private authService: AuthService,
     private chatsService: ChatsService,
-    private modalController: ModalController) { }
+    private modalController: ModalController,
+    public actionSheetController: ActionSheetController
+    ) { }
 
   ngOnInit(): void {
     this.chats = this.chatsService.getChatRooms();
-
-    //this.chatsService.getChatRooms().subscribe(x => { console.log(x); });
   }
 
   onLogOut() {
@@ -36,5 +36,26 @@ export class HomePage implements OnInit {
     }).then(modal => {
       modal.present();
     });
+  }
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Opciones',
+      buttons: [{
+        text: 'Cerrar sesión',
+        role: 'destructive',
+        icon: 'log-out',
+        handler: () => {
+          this.onLogOut();
+        }
+      }, {
+        text: 'Cancelar',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 }

@@ -1,12 +1,15 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="tertiary">
     <ion-title>
       Ionic Blank
     </ion-title>
-    <ion-button (click)="onLogOut()">
+    <ion-button (click)="presentActionSheet()" fill="clear" slot="end" >
+      <ion-icon slot="icon-only" name="menu" color="light" ></ion-icon>
+    </ion-button>
+    <!-- <ion-button (click)="onLogOut()" fill="clear">
         <ion-icon slot="start" name="log-out"></ion-icon>
         Cerrar sesión
-      </ion-button>
+      </ion-button> -->
   </ion-toolbar>
 </ion-header>
 
