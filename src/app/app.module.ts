@@ -24,14 +24,14 @@ import { FormsModule } from '@angular/forms';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-      AngularFireDatabase,
+    AngularFireDatabase,
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

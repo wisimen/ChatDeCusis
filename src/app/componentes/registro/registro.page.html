@@ -1,53 +1,61 @@
 <ion-header>
   <ion-toolbar color="secondary">
-    <ion-title text-center>Registrarse</ion-title>
+    <ion-title>
+      <ion-button fill="clear" routerLink="/login" routerDirection="backward">
+        <ion-icon slot="start" name="arrow-round-back" color="light"></ion-icon>
+      </ion-button>
+      <ion-label text-center>Registrarse</ion-label>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content padding>
-  <ion-item>
-    <ion-label position="floating">Nombre de usuario:</ion-label>
-    <ion-input type="text" name="username" [(ngModel)]="username" autocomplete="off" required></ion-input>
-  </ion-item>
-  <ion-item-group>
-    <ion-item>
-      <ion-label position="floating">Nombres:</ion-label>
-      <ion-input type="text" name="name" [(ngModel)]="name" autocomplete="off" required #nombres></ion-input>
-    </ion-item>
-    <div class="validation-errors">
-      <ng-container *ngFor="let validation of isValidField('username')">
-        <div class="error-message">
-          {{ validation.message }}
-        </div>
-      </ng-container>
-    </div>
-  </ion-item-group>
-  <ion-item>
-    <ion-label position="floating">Apellidos:</ion-label>
-    <ion-input type="text" name="lastName" [(ngModel)]="lastName" autocomplete="off" required></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Fecha de nacimiento:</ion-label>
-    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="dateOfBirth" required></ion-datetime>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Correo electrónico:</ion-label>
-    <ion-input inputmode="email" type="email" name="email" [(ngModel)]="email" autocomplete="off" required></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Celular:</ion-label>
-    <ion-input type="tel" inputmode="tel" name="phonenumber" [(ngModel)]="phonenumber" autocomplete="off" required>
-    </ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Contraseña:</ion-label>
-    <ion-input type="password" name="password" [(ngModel)]="password" required></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Confirmar contraseña:</ion-label>
-    <ion-input type="password" name="retryPassword" [(ngModel)]="retryPassword" required></ion-input>
-  </ion-item>
-  <ion-button expand="block" (click)="onSubmitRegister()" color="secondary">
-    Registrarse
-  </ion-button>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()" novalidate>
+    <ion-item-group formGroupName="registerGroup" novalidate>
+      <ion-item>
+        <ion-label position="floating">Nombre de usuario:</ion-label>
+        <ion-input type="text" name="username" formControlName="username" autocomplete="off"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Nombres:</ion-label>
+        <ion-input type="text" name="name" autocomplete="off" formControlName="name" autocomplete="off" #nombres></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of isValidField('username')">
+          <div class="error-message">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-label position="floating">Apellidos:</ion-label>
+        <ion-input type="text" name="lastName" autocomplete="off" formControlName="lastName" autocomplete="off"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Fecha de nacimiento:</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" autocomplete="off" formControlName="dateOfBirth"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Correo electrónico:</ion-label>
+        <ion-input inputmode="email" type="email" name="email" autocomplete="off" formControlName="email" autocomplete="off">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Celular:</ion-label>
+        <ion-input type="tel" inputmode="tel" name="phonenumber" autocomplete="off" formControlName="phonenumber" autocomplete="off">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña:</ion-label>
+        <ion-input type="password" name="password" formControlName="password" #pass></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Confirmar contraseña:</ion-label>
+        <ion-input type="password" name="retryPassword" [pattern]="'^'+pass.value+'$'" formControlName="retryPassword"></ion-input>
+      </ion-item>
+      <ion-button expand="block" (click)="onSubmitRegister()" color="secondary">
+        Registrarse
+      </ion-button>
+      {{'^'+pass.value+'$'}}
+    </ion-item-group>
+  </form>
 </ion-content>
